@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import { Sidebar } from "@/components/Sidebar";
+import { AppSidebar } from "@/components/Sidebar";
 import { Hero } from "@/components/Hero";
 import { FilterBar } from "@/components/FilterBar";
 import { DiaryCard } from "@/components/DiaryCard";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Menu } from "lucide-react";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import diary1 from "@/assets/diary-1.jpg";
 import diary2 from "@/assets/diary-2.jpg";
@@ -72,52 +73,58 @@ const diaries = [
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Sidebar */}
-      <Sidebar />
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full bg-background">
+        <AppSidebar />
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
-        {/* Header */}
-        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">Grow Diaries</h1>
-              <p className="text-sm text-muted-foreground">Community growing knowledge</p>
+        <main className="flex-1 overflow-y-auto">
+          {/* Header */}
+          <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border px-4 md:px-8 py-4">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <SidebarTrigger className="lg:hidden">
+                  <Menu className="w-5 h-5" />
+                </SidebarTrigger>
+                <div>
+                  <h1 className="text-xl md:text-2xl font-bold text-foreground">Grow Diaries</h1>
+                  <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Community growing knowledge</p>
+                </div>
+              </div>
+              <Link to="/create">
+                <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
+                  <Plus className="w-4 h-4 md:w-5 md:h-5" />
+                  <span className="hidden sm:inline">Start My Diary</span>
+                  <span className="sm:hidden">New</span>
+                </Button>
+              </Link>
             </div>
-            <Link to="/create">
-              <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
-                <Plus className="w-5 h-5" />
-                Start My Diary
+          </header>
+
+          {/* Content */}
+          <div className="p-4 md:p-8 space-y-8">
+            {/* Hero Section */}
+            <Hero />
+
+            {/* Filter Bar */}
+            <FilterBar />
+
+            {/* Diaries Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {diaries.map((diary, index) => (
+                <DiaryCard key={index} {...diary} />
+              ))}
+            </div>
+
+            {/* Load More */}
+            <div className="flex justify-center pt-8">
+              <Button variant="outline" size="lg" className="font-semibold">
+                Show more
               </Button>
-            </Link>
+            </div>
           </div>
-        </header>
-
-        {/* Content */}
-        <div className="p-8 space-y-8">
-          {/* Hero Section */}
-          <Hero />
-
-          {/* Filter Bar */}
-          <FilterBar />
-
-          {/* Diaries Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {diaries.map((diary, index) => (
-              <DiaryCard key={index} {...diary} />
-            ))}
-          </div>
-
-          {/* Load More */}
-          <div className="flex justify-center pt-8">
-            <Button variant="outline" size="lg" className="font-semibold">
-              Show more
-            </Button>
-          </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </SidebarProvider>
   );
 };
 

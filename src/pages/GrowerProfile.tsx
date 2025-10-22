@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Sidebar } from "@/components/Sidebar";
+import { AppSidebar } from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Menu } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,24 +46,29 @@ const GrowerProfile = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-background">
-      <Sidebar />
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full bg-background">
+        <AppSidebar />
 
-      <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto">
         {/* Header */}
-        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border px-8 py-4">
-          <div className="flex items-center justify-between">
+        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b border-border px-4 md:px-8 py-4">
+          <div className="flex items-center gap-3">
+            <SidebarTrigger className="lg:hidden">
+              <Menu className="w-5 h-5" />
+            </SidebarTrigger>
             <Link to="/">
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="w-4 h-4" />
-                Back to Diaries
+                <span className="hidden sm:inline">Back to Diaries</span>
+                <span className="sm:inline md:hidden">Back</span>
               </Button>
             </Link>
           </div>
         </header>
 
         {/* Content */}
-        <div className="p-8 max-w-7xl mx-auto">
+        <div className="p-4 md:p-8 max-w-7xl mx-auto">
           {/* Profile Header */}
           <div className="space-y-6">
             <Card>
@@ -256,6 +263,7 @@ const GrowerProfile = () => {
         </div>
       </main>
     </div>
+    </SidebarProvider>
   );
 };
 
