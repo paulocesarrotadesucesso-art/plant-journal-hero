@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Sidebar } from "@/components/Sidebar";
 import { Hero } from "@/components/Hero";
 import { FilterBar } from "@/components/FilterBar";
@@ -84,10 +85,12 @@ const Index = () => {
               <h1 className="text-2xl font-bold text-foreground">Grow Diaries</h1>
               <p className="text-sm text-muted-foreground">Community growing knowledge</p>
             </div>
-            <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
-              <Plus className="w-5 h-5" />
-              Start My Diary
-            </Button>
+            <Link to="/create">
+              <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
+                <Plus className="w-5 h-5" />
+                Start My Diary
+              </Button>
+            </Link>
           </div>
         </header>
 

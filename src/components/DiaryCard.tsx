@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MessageCircle, Leaf } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,14 +24,15 @@ export const DiaryCard = ({
   className,
 }: DiaryCardProps) => {
   return (
-    <div
-      className={cn(
-        "group bg-card rounded-xl overflow-hidden border border-border transition-all duration-300",
-        "hover:shadow-[var(--shadow-card-hover)] cursor-pointer",
-        className
-      )}
-      style={{ boxShadow: "var(--shadow-card)" }}
-    >
+    <Link to="/diary/1">
+      <div
+        className={cn(
+          "group bg-card rounded-xl overflow-hidden border border-border transition-all duration-300",
+          "hover:shadow-[var(--shadow-card-hover)] cursor-pointer",
+          className
+        )}
+        style={{ boxShadow: "var(--shadow-card)" }}
+      >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden">
         <img
@@ -74,5 +76,6 @@ export const DiaryCard = ({
         </div>
       </div>
     </div>
+    </Link>
   );
 };
