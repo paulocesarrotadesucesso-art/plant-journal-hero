@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import DiaryDetail from "./pages/DiaryDetail";
 import GrowerProfile from "./pages/GrowerProfile";
 import CreateDiary from "./pages/CreateDiary";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/diary/:id" element={<DiaryDetail />} />
           <Route path="/grower/:username" element={<GrowerProfile />} />
           <Route path="/create" element={<CreateDiary />} />
+          <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
