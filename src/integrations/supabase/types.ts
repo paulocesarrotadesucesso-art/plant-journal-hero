@@ -14,7 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      comments: {
+        Row: {
+          content: string
+          created_at: string
+          diary_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          diary_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          diary_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_diary_id_fkey"
+            columns: ["diary_id"]
+            isOneToOne: false
+            referencedRelation: "diaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      diaries: {
+        Row: {
+          breeder: string | null
+          comments_count: number | null
+          cover_image_url: string | null
+          created_at: string
+          description: string | null
+          environment_type: string | null
+          humidity: string | null
+          id: string
+          light_schedule: string | null
+          light_type: string | null
+          likes_count: number | null
+          medium: string | null
+          nutrients: string | null
+          status: string | null
+          strain: string
+          supplements: string | null
+          temperature: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          weeks: number | null
+        }
+        Insert: {
+          breeder?: string | null
+          comments_count?: number | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          environment_type?: string | null
+          humidity?: string | null
+          id?: string
+          light_schedule?: string | null
+          light_type?: string | null
+          likes_count?: number | null
+          medium?: string | null
+          nutrients?: string | null
+          status?: string | null
+          strain: string
+          supplements?: string | null
+          temperature?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          weeks?: number | null
+        }
+        Update: {
+          breeder?: string | null
+          comments_count?: number | null
+          cover_image_url?: string | null
+          created_at?: string
+          description?: string | null
+          environment_type?: string | null
+          humidity?: string | null
+          id?: string
+          light_schedule?: string | null
+          light_type?: string | null
+          likes_count?: number | null
+          medium?: string | null
+          nutrients?: string | null
+          status?: string | null
+          strain?: string
+          supplements?: string | null
+          temperature?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          weeks?: number | null
+        }
+        Relationships: []
+      }
+      diary_updates: {
+        Row: {
+          created_at: string
+          diary_id: string
+          height: string | null
+          id: string
+          notes: string | null
+          week: number
+        }
+        Insert: {
+          created_at?: string
+          diary_id: string
+          height?: string | null
+          id?: string
+          notes?: string | null
+          week: number
+        }
+        Update: {
+          created_at?: string
+          diary_id?: string
+          height?: string | null
+          id?: string
+          notes?: string | null
+          week?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "diary_updates_diary_id_fkey"
+            columns: ["diary_id"]
+            isOneToOne: false
+            referencedRelation: "diaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      likes: {
+        Row: {
+          created_at: string
+          diary_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          diary_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          diary_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "likes_diary_id_fkey"
+            columns: ["diary_id"]
+            isOneToOne: false
+            referencedRelation: "diaries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          location: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          location?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          location?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
