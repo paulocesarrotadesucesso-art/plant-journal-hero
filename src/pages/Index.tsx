@@ -3,9 +3,11 @@ import { AppSidebar } from "@/components/Sidebar";
 import { Hero } from "@/components/Hero";
 import { FilterBar } from "@/components/FilterBar";
 import { DiaryCard } from "@/components/DiaryCard";
+import { UserMenu } from "@/components/UserMenu";
 import { Button } from "@/components/ui/button";
 import { Plus, Menu } from "lucide-react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { useAuth } from "@/hooks/useAuth";
 
 import diary1 from "@/assets/diary-1.jpg";
 import diary2 from "@/assets/diary-2.jpg";
@@ -72,6 +74,8 @@ const diaries = [
 ];
 
 const Index = () => {
+  const { user } = useAuth();
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-background">
@@ -90,13 +94,18 @@ const Index = () => {
                   <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">Community growing knowledge</p>
                 </div>
               </div>
-              <Link to="/create">
-                <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
-                  <Plus className="w-4 h-4 md:w-5 md:h-5" />
-                  <span className="hidden sm:inline">Start My Diary</span>
-                  <span className="sm:hidden">New</span>
-                </Button>
-              </Link>
+              <div className="flex items-center gap-3">
+                {user && (
+                  <Link to="/create">
+                    <Button className="gap-2 bg-accent hover:bg-accent/90 text-accent-foreground font-bold shadow-lg">
+                      <Plus className="w-4 h-4 md:w-5 md:h-5" />
+                      <span className="hidden sm:inline">Start My Diary</span>
+                      <span className="sm:hidden">New</span>
+                    </Button>
+                  </Link>
+                )}
+                <UserMenu />
+              </div>
             </div>
           </header>
 
